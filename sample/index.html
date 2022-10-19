@@ -1,0 +1,61 @@
+<html>
+<script>
+
+function HandleLoginResponse(response)
+{
+	var text = JSON.parse(response);
+//	document.getElementById("textResponse").innerHTML = response+"<p>";	
+	document.getElementById("textResponse").innerHTML = "response: "+text+"<p>";
+}
+
+function SendLoginRequest(username,password)
+{
+	var request = new XMLHttpRequest();
+	request.open("POST","login.php",true);
+	request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	request.onreadystatechange= function ()
+	{
+		
+		if ((this.readyState == 4)&&(this.status == 200))
+		{
+			HandleLoginResponse(this.responseText);
+		}		
+	}
+	request.send("type=login&uname="+username+"&pword="+password);
+}
+</script>
+
+<form name="frmUser" method="post" action="" id="theForm">
+    <div class="message text-center"><?php if($message!="") { echo $message; } ?></div>
+
+    <h1 class="text-center">Login</h1>
+
+    <div>
+        <div class="row">
+            <label> Username </label> <input type="text" name="userName"
+                class="full-width" " required>
+        </div>
+        <div class="row">
+            <label>Password</label> <input type="password" id="myPass"
+                name="password" class="full-width" required>
+        </div>
+        <div class="row">
+            <input type="submit" name="submit" value="Submit"
+                class="full-width ">
+        </div>
+    </div>
+</form>
+
+<body>
+<div id="textResponse">
+awaiting response and test
+need to add button that gets user Input then invokes sendLoginReq
+Only use SendLoginRequest when we definitely have our information entered
+Potentially check for 'on-submit' AND once submitted, pass our form values in as parameters to 
+SendLoginRequest
+</div>
+<script>
+SendLoginRequest("kehoed","12345");
+</script>
+</body>
+</html>
