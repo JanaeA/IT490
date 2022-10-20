@@ -12,7 +12,8 @@ $response = "unsupported request type, politely FUCK OFF";
 switch ($request["type"])
 {
 	case "login":
-		$response = "login, yeah we can do that pls work $request {$request['type']} {$_POST['password']}";
+		$response = "login, yeah we can do that pls work $request {$request['type']} {$request['password']} USERNAME:{$_POST['uname']} PASSWORD: {$request['pword']} im actually the fucking best let's go";
+	//	echo var_dump($_GET);
 	break;
 }
 echo json_encode($response);
