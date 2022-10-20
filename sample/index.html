@@ -25,14 +25,14 @@ function SendLoginRequest(username,password)
 }
 </script>
 
-<form name="frmUser" method="post" action="" id="theForm">
+<form name="frmUser" method="post" action="" id="theForm" onsubmit="return false">
     <div class="message text-center"><?php if($message!="") { echo $message; } ?></div>
 
     <h1 class="text-center">Login</h1>
 
     <div>
         <div class="row">
-            <label> Username </label> <input type="text" name="userName"
+            <label> Username </label> <input type="text" id="myUser" name="userName"
                 class="full-width" " required>
         </div>
         <div class="row">
@@ -47,15 +47,38 @@ function SendLoginRequest(username,password)
 </form>
 
 <body>
-<div id="textResponse">
-awaiting response and test
+<div id="textResponseCHANGEDID">
+
+
+<p>awaiting response and test
 need to add button that gets user Input then invokes sendLoginReq
 Only use SendLoginRequest when we definitely have our information entered
 Potentially check for 'on-submit' AND once submitted, pass our form values in as parameters to 
-SendLoginRequest
+SendLoginRequest</p>
+
+</div>
+
+<div id="textResponse">
+
+
+
 </div>
 <script>
-SendLoginRequest("kehoed","12345");
+function doShit(){
+  let username = document.getElementById("myUser").value;
+  let password = document.getElementById("myPass").value;
+  SendLoginRequest(username, password);
+  alert(username);
+  alert(password);
+  
+  let myEle = document.createElement("h3");
+  let testContent = document.createTextNode("Hi this is a test, i should see this");
+  myEle.appendChild(testContent);
+  
+}
+const form = document.getElementById("theForm");
+form.addEventListener('submit', doShit);	
+//SendLoginRequest("kehoed","12345");
 </script>
 </body>
 </html>
