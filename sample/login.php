@@ -1,22 +1,29 @@
+#!/usr/bin/php
 <?php
+require_once('path.inc');
+require_once('get_host_info.inc');
+require_once('rabbitMQLib.inc');
 
-
-if (!isset($_POST))
+$client = new rabbitMQClient("../rabbitmqphp_example/testRabbitMQ.ini","testServer");
+if (isset($argv[1]))
 {
-	$msg = "NO POST MESSAGE SET, POLITELY FUCK OFF";
-	echo json_encode($msg);
-	exit(0);
+  $msg = $argv[1];
 }
-$request = $_POST;
-$response = "unsupported request type, politely FUCK OFF";
-switch ($request["type"])
+else
 {
-	case "login":
-		$response = "login, yeah we can do that pls work $request {$request['type']} {$request['password']} USERNAME:{$_POST['uname']} PASSWORD: {$request['pword']} im actually the fucking best let's go";
-	//	echo var_dump($_GET);
-	break;
+  $msg = "test message";
 }
-echo json_encode($response);
-exit(0);
 
-?>
+$request = array();
+$request['type'] = "login";
+$request['username'] = $_POST['userName'];
+$request['password'] = $_POST['password'];
+$response = $client->send_request($request);
+//$response = $client->publish($request);
+
+echo "client received response: ".PHP_EOL;
+print_r($response);
+echo "\n\n";
+
+echo $argv[0]." END".PHP_EOL;
+
