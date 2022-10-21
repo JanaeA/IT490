@@ -2,7 +2,15 @@
 
 function doRegister($username,$password)
 {
-        $statement = "select * from testtable where username = '$username'";
+	$mydb = new mysqli('127.0.0.1','testUser','12345','logininfo');
+
+	if ($mydb->errno != 0)
+	{
+        	echo "failed to connect to database: ". $mydb->error . PHP_EOL;
+        	exit(0);
+	}
+
+        $statement = "select * from login where user = '$username'";
         $response = $this->testdb->query($statement);
 
         while ($row = $response->fetch(assoc())
@@ -11,7 +19,7 @@ function doRegister($username,$password)
                 return 0;
         }
 
-        $statement = "insert into testtable (username, password) values ('$username', '$password')";
+        $statement = "insert into login (user, password) values ('$username', '$password')";
         $response = $this->testdb->query($statement);
         echo "successfully registered";
         return 1;
@@ -20,7 +28,15 @@ function doRegister($username,$password)
 
 function doLogin($username,$password)
 {
-        $statement = "select * from testtable where username = '$username'";
+	$mydb = new mysqli('127.0.0.1','testUser','12345','logininfo');
+
+	if ($mydb->errno != 0)
+	{
+        	echo "failed to connect to database: ". $mydb->error . PHP_EOL;
+        	exit(0);
+	}
+
+        $statement = "select * from login where user = '$username'";
         $response = $this->testdb->query($statement);
 
         while ($row = $response->fetch_assoc())
