@@ -13,7 +13,7 @@ function doRegister($username,$password)
         $statement = "select * from login where user = '$username'";
         $response = $this->testdb->query($statement);
 
-        while ($row = $response->fetch(assoc())
+        while ($row = $response->fetch(assoc()))
         {
                 echo "Username is already in the table, pick a different username";
                 return 0;
@@ -37,12 +37,12 @@ function doLogin($username,$password)
 	}
 
         $statement = "select * from login where user = '$username'";
-        $response = $this->testdb->query($statement);
+        $response = $mydb->query($statement);
 
         while ($row = $response->fetch_assoc())
         {
                 echo "checking password for $username".PHP_EOL;
-                if ($row["password"] == $pw)
+                if ($row["password"] == $password)
                 {
                         echo "passwords match for $username".PHP_EOL;
                         return 1; // passwords found to match
