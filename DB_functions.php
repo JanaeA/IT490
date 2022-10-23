@@ -11,7 +11,7 @@ function doRegister($username,$password)
 	}
 
         $statement = "select * from login where user = '$username'";
-        $response = $this->testdb->query($statement);
+        $response = $mydb->query($statement);
 
         while ($row = $response->fetch(assoc()))
         {
