@@ -25,7 +25,7 @@ function SendLoginRequest(username,password)
 }
 </script>
 
-<form name="frmUser" method="post" action="login.php" id="theForm" onsubmit="return false">
+<form name="frmUser" method="post" action="login.php" id="theForm" >
     <div class="message text-center"><?php if($message!="") { echo $message; } ?></div>
 
     <h1 class="text-center">Login</h1>
@@ -59,12 +59,12 @@ SendLoginRequest</p>
 </div>
 
 <div id="textResponse">
-
+<a href="register.html">Take me to register rn</a>
 
 
 </div>
 <script>
-function doShit(){
+function doLogin(){
   let username = document.getElementById("myUser").value;
   let password = document.getElementById("myPass").value;
   SendLoginRequest(username, password);
@@ -74,10 +74,11 @@ function doShit(){
   let myEle = document.createElement("h3");
   let testContent = document.createTextNode("Hi this is a test, i should see this");
   myEle.appendChild(testContent);
+  document.body.appendChild(myEle);
   
 }
 const form = document.getElementById("theForm");
-form.addEventListener('submit', doShit);	
+form.addEventListener('submit', doLogin);	
 //SendLoginRequest("kehoed","12345");
 </script>
 </body>
