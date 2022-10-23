@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 'ON');
 
-echo "<p>What is life</p>";
+echo "<p>What is life without food?</p>";
 require_once('rabbitmqphp_example/path.inc');
 require_once('rabbitmqphp_example/get_host_info.inc');
 require_once('rabbitmqphp_example/rabbitMQLib.inc');
@@ -19,10 +19,10 @@ else
 
 //$request = array();
 $request = $_POST;
-$request['type'] = "login";
+$request['type'] = "register";
 $request['username'] = $_POST['userName'];
 $request['password'] = $_POST['password'];
-$request['bhocolate_bip_bookies'] = "chocolate";
+$request['register_chocolate_chip_cookies'] = "raisin";
 $response = $client->send_request($request);
 //$response = $client->publish($request);
 
