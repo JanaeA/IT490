@@ -20,7 +20,7 @@ function doRegister($username,$password)
         }
 
         $statement = "insert into login (user, password) values ('$username', '$password')";
-        $response = $this->testdb->query($statement);
+        $response = $mydb->query($statement);
         echo "successfully registered";
         return 1;
 
