@@ -22,7 +22,7 @@ $request = $_POST;
 $request['type'] = "register";
 $request['username'] = $_POST['userName'];
 $request['password'] = $_POST['password'];
-$request['register_chocolate_chip_cookies'] = "raisin";
+//$request['register_chocolate_chip_cookies'] = "raisin";
 $response = $client->send_request($request);
 //$response = $client->publish($request);
 
