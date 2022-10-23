@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="textResponse">
+        <h1>THIS IS THE FUCKING REGISTRATION PAGE</h1>
+        <a href="index.html">Take me back to the main site PLEASE</a>
+        </div>
+
+        <form name="frmUser" method="post" action="register.php" id="theForm" >
+            <div class="message text-center"><?php if($message!="") { echo $message; } ?></div>
+        
+            <h1 class="text-center">Login</h1>
+        
+            <div>
+                <div class="row">
+                    <label> Username </label> <input type="text" id="myUser" name="userName"
+                        class="full-width" " required>
+                </div>
+                <div class="row">
+                    <label>Password</label> <input type="password" id="myPass"
+                        name="password" class="full-width" required>
+                </div>
+                <div class="row">
+                    <input type="submit" name="submit" value="Submit"
+                        class="full-width ">
+                </div>
+            </div>
+        </form>
+</body>
+
+<script>
+
+    function HandleRegisterResponse(response)
+    {
+        var text = JSON.parse(response);
+    //	document.getElementById("textResponse").innerHTML = response+"<p>";	
+        document.getElementById("textResponse").innerHTML = "response: "+text+"<p>";
+    }
+    
+    function SendRegisterRequest(username,password)
+    {
+        var request = new XMLHttpRequest();
+        request.open("POST","register.php",true);
+        request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        request.onreadystatechange= function ()
+        {
+            
+            if ((this.readyState == 4)&&(this.status == 200))
+            {
+                HandleRegisterResponse(this.responseText);
+            }		
+        }
+        request.send("type=register&uname="+username+"&pword="+password);
+    }
+        function doRegister(){
+        let username = document.getElementById("myUser").value;
+        let password = document.getElementById("myPass").value;
+        SendRegisterRequest(username, password);
+        alert(username);
+        alert(password);
+    
+        let myEle = document.createElement("h3");
+        let testContent = document.createTextNode("Hi this is a test, i should see this");
+        myEle.appendChild(testContent);
+        document.body.appendChild(myEle);
+    
+        }
+            const form = document.getElementById("theForm");
+            form.addEventListener('submit', doRegister);	
+            //SendRegisterRequest("kehoed","12345");
+    
+    </script>
+</html>
