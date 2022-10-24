@@ -1,5 +1,29 @@
 <?php
 
+function doValidate($username, $sessionId) {
+        $mydb = new mysqli('127.0.0.1','testUser','12345','sessions');
+
+        if ($mydb->errno != 0)
+        {
+                echo "failed to connect to database: ". $mydb->error . PHP_EOL;
+                exit(0);
+        }
+
+	$statement = "select * from sessions where user = '$username'";
+	$response = $mydb->query($statement);
+
+	while ($row = $response->fetch_assoc()) {
+		if ($row["sessionId"] == $sessionId) {
+			return 1; // user authenticated
+		}
+		echo "Wrong session key!";
+		return 0;
+	}
+	echo "User session does not exist!";
+	return 0;
+
+}
+
 function doRegister($username,$password)
 {
 	$mydb = new mysqli('127.0.0.1','testUser','12345','logininfo');
@@ -44,7 +68,13 @@ function doLogin($username,$password)
                 echo "checking password for $username".PHP_EOL;
                 if ($row["password"] == $password)
                 {
-                        echo "passwords match for $username".PHP_EOL;
+			echo "passwords match for $username".PHP_EOL;
+			$timestamp = CURRENT_TIMESTAMP();
+			echo "Timestamp created:  $timestamp";
+			$hash = password_hash($username, PASSWORD_DEFAULT);
+			$statement = "insert into sessions (user, sessionId, time) values ('$username', '$hash', '$timestamp')";
+		       	$response = $mydb->query($statement);
+
                         return 5; // passwords found to match
                 }
                 echo "Wrong password".PHP_EOL;
