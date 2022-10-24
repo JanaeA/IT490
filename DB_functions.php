@@ -82,4 +82,21 @@ function doLogin($username,$password)
         echo "Username not found".PHP_EOL;
         return 0; // Username not found
 }
+
+function doLogout($username) {
+	$mydb = new mysqli('127.0.0.1','testUser','12345','logininfo');
+
+        if ($mydb->errno != 0)
+        {
+                echo "failed to connect to database: ". $mydb->error . PHP_EOL;
+                exit(0);
+        }
+
+	$statement = "delete from sessions where username='$username'";
+	$response = $mydb->query($statement);
+	echo "USER LOGOUT";
+	return 1;
+}
+
+
 ?>
