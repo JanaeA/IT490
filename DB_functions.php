@@ -69,7 +69,7 @@ function doLogin($username,$password)
                 if ($row["password"] == $password)
                 {
 			echo "passwords match for $username".PHP_EOL;
-			$timestamp = CURRENT_TIMESTAMP();
+			$timestamp = date('Y-m-d H:i;s');
 			echo "Timestamp created:  $timestamp";
 			$hash = password_hash($username, PASSWORD_DEFAULT);
 			$statement = "insert into sessions (user, sessionId, time) values ('$username', '$hash', '$timestamp')";

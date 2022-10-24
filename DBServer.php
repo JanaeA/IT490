@@ -20,7 +20,9 @@ function requestProcessor($request)
     case "register":
       return doRegister($request['username'],$request['password']);
     case "validate_session":
-      return doValidate($request['username'],$request['sessionId']);
+	    return doValidate($request['username'],$request['sessionId']);
+    case "logout":
+	    return doLogout($request['username']);
   }
   return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
