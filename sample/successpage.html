@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+    <body>
+        <h1>We have successfully logged in.</h1>
+        <p>Well, damn. Never expected to get this far, tbh.</p>
+
+        <h2>User Profile Page: Put Username Here <span id="theUserName"></span></h2>
+        
+        <form name="frmUser" method="post" action="logout.php" id="theForm" >
+            <label for="logoutButton">Click me and we will logout.</label>
+            <input type="button" name="logout" value="Logout" id="logoutButton">
+            <input type="submit" name="submit" value="Submit" class="full-width ">
+            <input type="input" name="userName" value="" id="theUser" >
+            <input type="input" name="username" value="" id="theUserTest">
+        </form>
+
+    </body>
+</html>
+<script>
+    // function logoutFunction(){
+    //     alert("We are trying to logout");
+    // }
+    //let logoutButton = document.getElementById("logoutButton");
+    //logoutButton.addEventListener("click", logoutFunction);
+    let user = sessionStorage.getItem('login');
+    document.getElementById("theUserName").innerText = user;
+    //alert(user);
+    document.getElementById("theUser").value = user
+    document.getElementById("theUserTest").value = user;
+</script>

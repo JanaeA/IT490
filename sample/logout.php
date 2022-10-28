@@ -16,14 +16,11 @@ else
 {
   $msg = "test message";
 }
-$argv = "pain";
-echo "<p>GOT HERE</p>";
 //$request = array();
 $request = $_POST;
-$request['type'] = "login";
 $request['username'] = $_POST['userName'];
-$request['password'] = $_POST['password'];
-$userName = $request['username'];
+$request['type'] = "logout";
+echo $request['username'];
 //$request['bhocolate_bip_bookies'] = "chocolate";
 $response = $client->send_request($request);
 //$response = $client->publish($request);
@@ -32,22 +29,20 @@ echo "client received response: ".PHP_EOL;
 print_r($response);
 //echo $response;
 echo "\n\n";
-echo "<h1>help</h1>";
 echo $argv[0]." END".PHP_EOL;
 
 if ($response > 0){
-  echo "<h2>good shit you're in bro (Response = $response)</h2>";
+  echo "<h2>good shit you're logging out (Response = $response)</h2>";
+  header("refresh: 4, url=index.html");
   echo "<script type='text/Javascript'>
-  sessionStorage.setItem('login', '$userName');
+  sessionStorage.removeItem('login');
   alert('This is a test!');
   </script>";
-  header("refresh: 4, url=successpage.html");
-  echo "<h5>I SHOULD BE EXECUTING</h5>";
   exit();
 }
 else if($response == 0){
-  echo "<h2>your shit is wrong fam (Response = $response)</h2>";
-  header("refresh: 2, url=register.html");
+  echo "<h2>why aren't we logging out (Response = $response)</h2>";
+  header("refresh: 2, url=index.html");
   exit();
 }
 else{
