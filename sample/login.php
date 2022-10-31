@@ -41,7 +41,10 @@ if ($response > 0){
   sessionStorage.setItem('login', '$userName');
   alert('This is a test!');
   </script>";
-  header("refresh: 4, url=successpage.html");
+  session_start();
+  $_SESSION['isLoggedIn'] = true;
+  $_SESSION['username'] = $userName;
+  header("refresh: 4, url=successpage.php");
   echo "<h5>I SHOULD BE EXECUTING</h5>";
   exit();
 }
@@ -56,5 +59,5 @@ else{
   exit();
 }
 
-?>
+ ?>
 

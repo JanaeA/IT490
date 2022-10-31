@@ -38,6 +38,7 @@ if ($response > 0){
   sessionStorage.removeItem('login');
   alert('This is a test!');
   </script>";
+  session_destroy();
   exit();
 }
 else if($response == 0){
