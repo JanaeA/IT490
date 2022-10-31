@@ -5,6 +5,7 @@ require_once('rabbitmqphp_example/get_host_info.inc');
 require_once('rabbitmqphp_example/rabbitMQLib.inc');
 //include('DMZ_functions.php');
 require_once('lastFM.php');
+require_once('serp.php');
 
 function requestProcessor($request)
 {
@@ -29,7 +30,12 @@ function requestProcessor($request)
 		$apiKey = "f199b01d3295f26ab3086c39aeedde8e";
                 $lastfm = new LastFM($apiKey);
                 $similar = $lastfm->getSimilar($request['artist']);
-                return $similar;
+		return $similar;
+	case "getEvents":
+		$apiKey = "896b862ddd4b636adb811cd50570873a70a9a3cdd4849f50eeb06fcc22620cc9";
+		$serp = new Serp($apiKey);
+		$events = $serp->getEvents($request['location']);
+		return $events;
 
   }
   	
@@ -37,7 +43,7 @@ function requestProcessor($request)
 }
 //$apiKey = "f199b01d3295f26ab3086c39aeedde8e";
 //$lastfm = new LastFM($apiKey);
-$server = new rabbitMQServer("testRabbitMQ.ini","testServer");
+$server = new rabbitMQServer("testRabbitMQ.ini","DMZServer");
 
 $server->process_requests('requestProcessor');
 exit();
