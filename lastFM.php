@@ -14,7 +14,8 @@ class LastFM
 		curl_setopt($curl,CURLOPT_TIMEOUT,3);
 		$data = curl_exec($curl);
 		curl_close($curl);
-		return $data;
+		$xml = new SimpleXmlElement($data);
+		return $xml->Info;
 	}
 	function getSimilar($artist)
         {
