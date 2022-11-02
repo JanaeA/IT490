@@ -39,7 +39,11 @@ function doRegister($username,$password)
 
         while ($row = $response->fetch_assoc())
         {
-                echo "Username is already in the table, pick a different username";
+		echo "Username is already in the table, pick a different username";
+		$errorClient = new rabbitMQClient("rabbitmqphp_example/testRabbitMQ.ini","ErrorServer");
+		$sampleRequest['type']="error";
+		$sampleRequest['message']="User duplicate already loggedin";
+		$errorResponse = $errorClient->publish($sampleRequest);
                 return 0;
         }
 
