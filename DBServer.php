@@ -23,6 +23,10 @@ function requestProcessor($request)
 	    return doValidate($request['username'],$request['sessionId']);
     case "logout":
 	    return doLogout($request['username']);
+    case "addFriend":
+	    return addFriend($request['username'],$request['friendtoadd']);
+    case "getFriends":
+	    return getFriends($request['username']);
   }
   return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
