@@ -35,7 +35,7 @@ function requestProcessor($request)
 		$apiKey = "896b862ddd4b636adb811cd50570873a70a9a3cdd4849f50eeb06fcc22620cc9";
 		$serp = new Serp($apiKey);
 		$events = $serp->getEvents($request['location']);
-		return $events;
+		return print($events);
 
   }
   	
