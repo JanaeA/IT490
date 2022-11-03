@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
     <body>
     <?php 
 error_reporting(E_ALL);
@@ -42,14 +42,13 @@ else if($response == 0){
 
     <h2>The Real French Stuff</h2>
     <ul class="playlist">
-        <?php foreach($response->track as $k=>$v): ?>
+      <p>WHAT IS THE LIFE</p>
+        <?php foreach($response->artist as $k=>$v): ?>
             <li>
-                <a href='<?php echo $v->url; ?>'>
+                <a href="<?php echo $v->url; ?>">
                     <img src="<?php echo $v->image[2]; ?>" alt="image">
-                    <span class="info">
-                        <span class="artist"> <?php echo $v->artist; ?> </span>
-                        <span class="name"> <?php echo $v->name; ?> </span>
-                    </span>
+                        <p class="artist"> <?php echo $v->artist; ?> </p>
+                        <p class="name"> <?php echo $v->name; ?> </span>
                  </a>
             </li>
             <?php endforeach; ?>

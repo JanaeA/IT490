@@ -1,7 +1,12 @@
 <?php
 error_reporting(E_ALL);
 //ini_set('display_errors', 'ON');
-
+session_start();
+if (!isset($_SESSION['isLoggedIn'])) {
+    echo "You weren't logged in! Go do it right..";
+    header("refresh: 2, url=index.html");
+    exit();
+}
 echo "<p>What is life</p>";
 require_once('rabbitmqphp_example/path.inc');
 require_once('rabbitmqphp_example/get_host_info.inc');
@@ -17,8 +22,9 @@ else
   $msg = "test message";
 }
 //$request = array();
+session_start();
 $request = $_POST;
-$request['username'] = $_POST['userName'];
+$request['username'] = $_SESSION["username"];
 $request['type'] = "logout";
 echo $request['username'];
 //$request['bhocolate_bip_bookies'] = "chocolate";

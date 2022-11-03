@@ -8,6 +8,12 @@ require_once('rabbitmqphp_example/get_host_info.inc');
 require_once('rabbitmqphp_example/rabbitMQLib.inc');
 
 $client = new rabbitMQClient("rabbitmqphp_example/testRabbitMQ.ini","testServer");
+// $errorClient = new rabbitMQClient("rabbitmqphp_example/testRabbitMQ.ini","ErrorServer");
+// $sampleRequest['type'] = "error";
+// $sampleRequest['message'] = "User duplicate already logged in";
+// $response = $client->publish($sampleRequest);
+
+
 if (isset($argv[1]))
 {
   $msg = $argv[1];

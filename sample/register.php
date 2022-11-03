@@ -1,8 +1,8 @@
 <?php
 error_reporting(E_ALL);
-ini_set('display_errors', 'ON');
+// ini_set('display_errors', 'ON');
 
-echo "<p>What is life without food?</p>";
+echo "<p>Registration Page.?</p>";
 require_once('rabbitmqphp_example/path.inc');
 require_once('rabbitmqphp_example/get_host_info.inc');
 require_once('rabbitmqphp_example/rabbitMQLib.inc');
@@ -28,9 +28,19 @@ $response = $client->send_request($request);
 
 echo "client received response: ".PHP_EOL;
 print_r($response);
+
+
 echo "\n\n";
 
-echo $argv[0]." END".PHP_EOL;
+if($response == 1){
+  print_r("Registration is a success. Please login through the main page.");
+  header("refresh: 5, url=index.html");
+  exit();
+}
+else{
+  print_r("Registration failed. The response was $response");
+  header("refresh:3, url=index.html");
+  exit();
+}
 
-echo "<h1>help</h1>";
 ?>

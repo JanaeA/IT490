@@ -4,13 +4,6 @@ require_once('path.inc');
 require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
 
-function doLogin($username,$password)
-{
-    // lookup username in databas
-    // check password
-    return true;
-    //return false if not valid
-}
 
 function requestProcessor($request)
 {
@@ -22,15 +15,30 @@ function requestProcessor($request)
   }
   switch ($request['type'])
   {
-    case "login":
-      return doLogin($request['username'],$request['password']);
-    case "validate_session":
-      return doValidate($request['sessionId']);
+    case "error":
+      return doErrorLogging($request['message']);
   }
   return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
+function doErrorLogging($message){
+  $filename = "errorLogging.txt";
+  $newline = "\n\n";
+  $contents = "$message\r\n";
+  
+  if(!is_file($filename)){
+    file_put_contents($filename, $contents, FILE_APPEND);
+    echo "File $filename did not exist and has been created. $contents has been added to the file.";
 
-$server = new rabbitMQServer("testRabbitMQ.ini","testServer");
+  }
+  else{
+    file_put_contents($filename, $contents, FILE_APPEND);
+    echo "File $filename has been created. $contents has been added to the file.";
+  }
+  return "Exiting the function";
+
+}
+
+$server = new rabbitMQServer("testRabbitMQ.ini","ErrorServer");
 
 $server->process_requests('requestProcessor');
 exit();
