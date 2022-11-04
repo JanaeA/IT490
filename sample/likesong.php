@@ -4,6 +4,7 @@
     <body>
     <?php 
 error_reporting(E_ALL);
+ini_set('display_errors', 1);
 echo "<p>What is life</p>";
 require_once('rabbitmqphp_example/path.inc');
 require_once('rabbitmqphp_example/get_host_info.inc');
@@ -28,14 +29,21 @@ $request['email'] = $_POST['email'];
 $to = "dg546@njit.edu";
 $subject = "Your favorite band!!! $theirFavBand";
 $txt = "Your favorite band has an upcoming event. Stay on the lookout";
-$headers = "From: dg546@njit.edu" ."\r\n" . "CC : whoelse@example.com";
+$headers = "MIME-Version: 1.0" . "\r\n";
+$headers .= "Content-type:text/html;charset=UTF-8"."\r\n";
 
-mail($to, $subject, $txt, $headers);
+echo "<br> Your favorite band is $theirFavBand";
+echo "<br>";
+$success = mail($to, $subject, $txt, $headers);
+if(!$success){
+  print_r(error_get_last()['message']);
+}
+
+echo "Mail has been sent if (1), fail if (0) $success";
+
 //$response = $client->publish($request);
 
-echo "client received response: ".PHP_EOL;
 //print_r($response);
-echo $argv[0]." END".PHP_EOL;
 
 // if ($response > 0){
 //   echo "<h2>good shit you're in bro</h2>";

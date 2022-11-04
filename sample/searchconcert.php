@@ -49,13 +49,16 @@
          //print_r($key);
          
          //print_r($testVar["search_information"]);
-         print_r($value);
+         //print_r($value);
          print_r($value["title"]);
          echo " || ";
          print_r($value["date"]["when"]);
          echo " ==> ";
-         print_r($value[0]);
-         echo "==>";
+         print_r($value["address"][0]);
+         echo "( ";
+         print_r($value["address"][1]);
+         echo " )";
+
          print_r($value[1]);
          //print_r($value["start_date"]);
          echo "<br/>";
@@ -70,6 +73,7 @@
           //echo "$testVar[$key]";
           //print_r("$title || $start || $when || $address donezies.\n\n\n $testVar[$key]");
       }
+      echo "<br><br>";
         if ($eventResponse > 0){
             echo "You've searched $theLocation successfully!";
            // header("refresh: 5, url=successpage.php");
@@ -87,13 +91,13 @@
 
           ?>
 
-          <form action="likesong.php" method="POST">
+          <form action="likesong.php" method="POST" id="likedsongform">
           <label for="bands">Choose a band to like:</label>
-          <select name="bands" id="bands">
+          <select name="bands">
             <?php foreach($testVar["events_results"] as $key=> $value): ?>
-              <option value='<?php $value["title"];?>'><?= $value["title"];?></option>
+              <option value="<?= $value["title"];?>"><?= $value["title"];?></option>
+              <?php endforeach; ?>
           </select>
-          <?php endforeach; ?>
           <input type="text" name="email" placeholder="Enter your email to be notified">
           <input type="submit" value="submit">
           </form>
