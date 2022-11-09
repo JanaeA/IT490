@@ -25,12 +25,12 @@ function requestProcessor($request)
 		$apiKey = "f199b01d3295f26ab3086c39aeedde8e";
 		$lastfm = new LastFM($apiKey);
 		$bio = $lastfm->getInfo($request['artist']);
-		return print_r($bio, true);
+		return $bio;
 	case "getSimilar":
 		$apiKey = "f199b01d3295f26ab3086c39aeedde8e";
                 $lastfm = new LastFM($apiKey);
                 $similar = $lastfm->getSimilar($request['artist']);
-		return print_r($similar, true);
+		return $similar;
 	case "getEvents":
 		$apiKey = "896b862ddd4b636adb811cd50570873a70a9a3cdd4849f50eeb06fcc22620cc9";
 		$serp = new Serp($apiKey);
