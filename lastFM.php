@@ -8,7 +8,7 @@ class LastFM
 	}
 	function getInfo($artist)
 	{
-		$curl =  curl_init("http://ws.audioscrobbler.com/2.0/?method=artist.getInfo&artist=$artist&api_key=".$this->apiKey);
+		$curl =  curl_init("http://ws.audioscrobbler.com/2.0/?method=artist.getInfo&artist=$artist&api_key=".$this->apiKey ."&format=json");
 		curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
 		curl_setopt($curl,CURLOPT_HEADER,0);
 		curl_setopt($curl,CURLOPT_TIMEOUT,3);
@@ -19,7 +19,7 @@ class LastFM
 	}
 	function getSimilar($artist)
         {
-                $curl =  curl_init("http://ws.audioscrobbler.com/2.0/?method=artist.getSimilar&artist=$artist&api_key=".$this->apiKey);
+                $curl =  curl_init("http://ws.audioscrobbler.com/2.0/?method=artist.getSimilar&artist=$artist&api_key=".$this->apiKey . "format=json");
                 curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
                 curl_setopt($curl,CURLOPT_HEADER,0);
                 curl_setopt($curl,CURLOPT_TIMEOUT,3);
