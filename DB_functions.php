@@ -46,8 +46,8 @@ function doRegister($username,$password)
 		$errorResponse = $errorClient->publish($sampleRequest);
                 return 0;
         }
-
-        $statement = "insert into login (user, password) values ('$username', '$password')";
+	$hash = password_hash($password, PASSWORD_DEFAULT);
+        $statement = "insert into login (user, password) values ('$username', '$hash')";
         $response = $mydb->query($statement);
         echo "successfully registered";
         return 1;
@@ -69,8 +69,10 @@ function doLogin($username,$password)
 
         while ($row = $response->fetch_assoc())
         {
-                echo "checking password for $username".PHP_EOL;
-                if ($row["password"] == $password)
+		echo "checking password for $username".PHP_EOL;
+		// if ($row["password"] == $password)
+		// old way before password hashing ^
+		if (password_verify($password,$row["password"]))
                 {
 			echo "passwords match for $username".PHP_EOL;
 			$timestamp = date('Y-m-d H:i;s');
@@ -153,7 +155,7 @@ $mydb = new mysqli('127.0.0.1','testUser','12345','logininfo');
 	while ($r = $result->fetch_assoc()) {
 	
 		$rows[]=$r;
-	}	
+	}
 	echo $rows;	
 	return json_encode($rows);
 
