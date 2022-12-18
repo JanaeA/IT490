@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
     <body>
     <?php 
 error_reporting(E_ALL);
@@ -18,7 +18,6 @@ else
 {
   $msg = "test message";
 }
-echo "<p>GOT HERE</p>";
 $request = $_POST;
 $request['type'] = "getInfo";
 $request['artist'] = $_POST['band'];
@@ -27,7 +26,6 @@ $response = $client->send_request($request);
 
 echo "client received response: ".PHP_EOL;
 print_r($response);
-echo "<h1>help</h1>";
 echo $argv[0]." END".PHP_EOL;
 
 if ($response > 0){
@@ -39,19 +37,22 @@ else if($response == 0){
     print_r("We went wrong somewhere");
 }
 ?>
-
-    <h2>The Real French Stuff</h2>
-    <ul class="playlist">
-      <p>WHAT IS THE LIFE</p>
-        <?php foreach($response->artist as $k=>$v): ?>
-            <li>
-                <a href="<?php echo $v->url; ?>">
-                    <img src="<?php echo $v->image[2]; ?>" alt="image">
-                        <p class="artist"> <?php echo $v->artist; ?> </p>
-                        <p class="name"> <?php echo $v->name; ?> </span>
-                 </a>
-            </li>
-            <?php endforeach; ?>
-    </ul>
+    <div class="container-fluid">
+      <h2>The Real French Stuff</h2>
+        <ul class="playlist">
+          <?php foreach($response->artist as $k=>$v): ?>
+		echo "$response <br>";
+              <li>
+                  <a href="<?php echo $v->url; ?>">
+                      //<img src=<?php echo $v->image[2]; ?> alt="image">
+			echo ' <img src="$v->image[2]"> ';
+			echo '<img src="$v->image[1]">';
+                          <p class="artist"> <?php echo $v->artist; ?> </p>
+                          <p class="name"> <?php echo $v->name; ?> </span>
+                  </a>
+              </li>
+              <?php endforeach; ?>
+        </ul>
+    </div>
     </body>
 </html>

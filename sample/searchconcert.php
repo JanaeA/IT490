@@ -99,6 +99,7 @@
               <?php endforeach; ?>
           </select>
           <input type="text" name="email" placeholder="Enter your email to be notified">
+          <input type="text" name="phonenumber" placeholder="Enter your phone number to be notified -- format = ten digit dialing 1234567890 ">
           <input type="submit" value="submit">
           </form>
     </body>
