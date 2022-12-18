@@ -22,6 +22,9 @@ sudo ufw allow 8883
 sudo ufw allow 15674
 sudo ufw allow 15675
 
+sudo ufw deny out 80
+sudo ufw deny out 443
+
 ufw logging low
 
 ufw --force enable
