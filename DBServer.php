@@ -29,6 +29,9 @@ function requestProcessor($request)
 	    return addReview($request['user'],$request['title'],$request['text']);
     case "getFriends":
 	    return getFriends($request['username']);
+    case "getReview":
+	    return getReview($request['username']);
+
   }
   return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
