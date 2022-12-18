@@ -9,8 +9,18 @@ ufw default allow outgoing
 ufw deny http
 ufw deny https
 
-ufw allow from 10.147.19.109 to any port 9993
-ufw allow from 10.147.19.109 to any port 5671,5672,15671,15672,4369,25672
+sudo ufw allow 4369
+sudo ufw allow 5671
+sudo ufw allow 5672
+sudo ufw allow 25672
+sudo ufw allow 35672:35682/tcp
+sudo ufw allow 15672
+sudo ufw allow 61613
+sudo ufw allow 61614
+sudo ufw allow 1883
+sudo ufw allow 8883
+sudo ufw allow 15674
+sudo ufw allow 15675
 
 ufw logging low
 
