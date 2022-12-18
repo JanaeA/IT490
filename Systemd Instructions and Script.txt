@@ -1,0 +1,30 @@
+Summary: The point of this document is to give instructions on how to make a systemd script to run the database
+server and DMZ server files so that it can be managed by systemd. The instructions are relatively the same for 
+both of the servers.
+
+Step 1: Go to /etc/systemd/system
+
+Step 2: Make the DBService, you can call it DBServer.service. Do this by
+typing sudo vim DBServer.service
+
+Step 3: Inside the DBServer.service file type this in: 
+
+[Unit]
+Description=Run DBServer at startup after network becomes reachable
+
+[Service]
+Type=simple
+RemainAfterExit=yes
+ExecStart=/usr/bin/php -f /home/janae/git/IT490/DBServer.php
+TimeoutStartSec=0
+
+[Install]
+WantedBy=default.target
+
+Step 4: Then type systemctl daemon-reload
+
+Step 5: Then type systemctl enable DBServer.service
+
+You can type systemctl status DBServer.service to see the status of the service
+
+The instructions are similar for the DMZServer, just change DBServer to DMZServer and do the same thing.
