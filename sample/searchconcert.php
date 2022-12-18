@@ -90,7 +90,17 @@
 
 
           ?>
-
+          <form action="addreview.php" method="POST" id="reviewform">
+          <label for="bands">Choose an event to review:</label>
+          <select name="event">
+            <?php foreach($testVar["events_results"] as $key=> $value): ?>
+              <option value="<?= $value["title"];?>"><?= $value["title"];?></option>
+              <?php endforeach; ?>
+          </select>
+	  <textarea name="writereview" rows="8" cols="50">Enter your SCATHING REVIEW here</textarea>
+	  <input type="submit" value="submit">
+	  </form>
+	
           <form action="likesong.php" method="POST" id="likedsongform">
           <label for="bands">Choose a band to like:</label>
           <select name="bands">
