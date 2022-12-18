@@ -25,6 +25,8 @@ function requestProcessor($request)
 	    return doLogout($request['username']);
     case "addFriend":
 	    return addFriend($request['username'],$request['friendtoadd']);
+    case "addReview":
+	    return addReview($request['user'],$request['title'],$request['text']);
     case "getFriends":
 	    return getFriends($request['username']);
   }

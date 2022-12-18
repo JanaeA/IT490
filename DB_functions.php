@@ -161,4 +161,19 @@ $mydb = new mysqli('127.0.0.1','testUser','12345','logininfo');
 
 }
 
+function addReview($username, $title, $text) {
+	$mydb = new mysqli('127.0.0.1','testUser','12345','logininfo');
+        if ($mydb->errno != 0)
+        {
+                echo "failed to connect to database: ". $mydb->error . PHP_EOL;
+                exit(0);
+	}
+	$statement = "insert into events(user, title, text) values ('$username','$title','$text')";
+	$response = $mydb->query($statement);
+        echo "successfully added event review from $username";
+        return 1;
+}
+
+
+
 ?>
