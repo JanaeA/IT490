@@ -174,6 +174,26 @@ function addReview($username, $title, $text) {
         return 1;
 }
 
+function getReview($username) {
+$mydb = new mysqli('127.0.0.1','testUser','12345','logininfo');
+//      $response = "no friends";
+        if ($mydb->errno != 0)
+        {
+                echo "failed to connect to database: ". $mydb->error . PHP_EOL;
+                exit(0);
+        }
+
+        $statement = "select title, text from events where user=$username";
+        $result=mysqli_query($mydb,$statement);
+        $rows = array();
+        while ($r = $result->fetch_assoc()) {
+
+                $rows[]=$r;
+        }
+        echo $rows;
+        return json_encode($rows);
+
+}
 
 
 ?>
